@@ -151,6 +151,47 @@ public class ArbolBinario<T> {
         return ListaNodos;
 
     }
+
+    // ==== EJERCICIO 7 ====
+    public void sustituirVariable(NodoAritmetico nodo, String variable, String numero){
+        if (nodo != null){
+            if (nodo.getDato().equals(variable)){
+                nodo.setDato(numero);
+            }
+
+            sustituirVariable(nodo.getIzquierda(), variable, numero);
+            sustituirVariable(nodo.getDerecha(), variable, numero);
+        }
+    }
+
+    //Se asume que no hay variables en el arbol.
+    public double evaluar(NodoAritmetico nodo){
+        if (nodo == null){
+            return 0;
+        }
+
+        if (nodo.getIzquierda() == null && nodo.getDerecha() == null){
+            return Double.parseDouble(nodo.getDato());
+        }
+
+        if (nodo.esOperador(nodo.getDato())){
+            switch (nodo.getDato()) {
+                case "+":
+                    return evaluar(nodo.getIzquierda()) + evaluar(nodo.getDerecha());
+                case "-":
+                    return evaluar(nodo.getIzquierda()) - evaluar(nodo.getDerecha());
+                case "*":
+                    return evaluar(nodo.getIzquierda()) * evaluar(nodo.getDerecha());
+                case "/":
+                    return evaluar(nodo.getIzquierda()) / evaluar(nodo.getDerecha());
+                default:
+                    //nunca debería entrar acá por el if
+                    throw new AssertionError();
+            }
+        }
+
+        return Double.parseDouble(nodo.getDato());
+    }
 }
 
 
