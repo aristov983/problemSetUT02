@@ -244,7 +244,6 @@ public class ArbolBinario<T> {
 
     public static void ejercicio7(){
         Core.headerMessage(7);
-        Core.headerMessage(6);
         System.out.println("Sea el siguiente árbol binario:");
         System.out.println("        *");
         System.out.println("       / \\");
