@@ -1,3 +1,4 @@
+import clases.ArbolBinario;
 import java.util.Scanner;
 
 public class App {
@@ -11,8 +12,10 @@ public class App {
             sc.nextLine();
             switch (opcion){
                 case 6:
+                    ArbolBinario.ejercicio6();
                     break;
                 case 7:
+                    ArbolBinario.ejercicio7();
                     break;
                 case 12:
                     break;

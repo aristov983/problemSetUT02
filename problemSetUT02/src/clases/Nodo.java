@@ -13,6 +13,11 @@ public class Nodo<T> {
         this.derecha = null;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(dato);
+    }
+
     // Getters y Setters
     public T getDato() {
         return dato;
