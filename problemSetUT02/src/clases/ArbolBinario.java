@@ -152,49 +152,6 @@ public class ArbolBinario<T> {
 
     }
 
-    // ==== EJERCICIO 7 ====
-    public void sustituirVariable(NodoAritmetico nodo, String variable, String numero){
-        if (nodo != null){
-            if (nodo.getDato().equals(variable)){
-                nodo.setDato(numero);
-            }
-
-            sustituirVariable(nodo.getIzquierda(), variable, numero);
-            sustituirVariable(nodo.getDerecha(), variable, numero);
-        }
-    }
-
-    //Se asume que no hay variables en el arbol.
-    public double evaluar(NodoAritmetico nodo){
-        if (nodo == null){
-            return 0;
-        }
-
-        if (nodo.getIzquierda() == null && nodo.getDerecha() == null){
-            return Double.parseDouble(nodo.getDato());
-        }
-
-        if (nodo.esOperador(nodo.getDato())){
-            switch (nodo.getDato()) {
-                case "+":
-                    return evaluar(nodo.getIzquierda()) + evaluar(nodo.getDerecha());
-                case "-":
-                    return evaluar(nodo.getIzquierda()) - evaluar(nodo.getDerecha());
-                case "*":
-                    return evaluar(nodo.getIzquierda()) * evaluar(nodo.getDerecha());
-                case "/":
-                    return evaluar(nodo.getIzquierda()) / evaluar(nodo.getDerecha());
-                default:
-                    //nunca debería entrar acá por el if
-                    throw new AssertionError();
-            }
-        }
-
-        return Double.parseDouble(nodo.getDato());
-    }
-
-
-
     //==== PONIENDO A PRUEBA LOS METODOS | ESTO DE UTILIZARÁ EN MAIN ====
     public static void ejercicio6(){
         Core.headerMessage(6);
@@ -244,7 +201,9 @@ public class ArbolBinario<T> {
 
     public static void ejercicio7(){
         Core.headerMessage(7);
-        System.out.println("Sea el siguiente árbol binario:");
+
+        // Parte 1: construcción manual + sustitución + evaluación
+        System.out.println("Parte 1 — árbol construido manualmente: * (+ x 3) 2");
         System.out.println("        *");
         System.out.println("       / \\");
         System.out.println("      +   2");
@@ -254,20 +213,30 @@ public class ArbolBinario<T> {
 
         NodoAritmetico mult = new NodoAritmetico("*");
         NodoAritmetico suma = new NodoAritmetico("+");
-        NodoAritmetico x = new NodoAritmetico("x");
+        NodoAritmetico x    = new NodoAritmetico("x");
         NodoAritmetico tres = new NodoAritmetico("3");
-        NodoAritmetico dos = new NodoAritmetico("2");
+        NodoAritmetico dos  = new NodoAritmetico("2");
 
         mult.setIzquierda(suma);
         mult.setDerecha(dos);
         suma.setIzquierda(x);
         suma.setDerecha(tres);
 
-        ArbolBinario<String> arbol = new ArbolBinario<>();
-        System.out.println("Sustituimos la x por 4 en el arbol binario.");
-        arbol.sustituirVariable(mult, "x", "4");
+        ArbolAritmetico arbol = new ArbolAritmetico(mult);
+        System.out.println("Sustituimos x por 4.");
+        arbol.sustituirVariable("x", "4");
+        System.out.println("Resultado: " + arbol.evaluar());
         System.out.println();
-        System.out.println("Resultado: " + arbol.evaluar(mult));
+
+        // Parte 2: construcción desde notación prefija
+        System.out.println("Parte 2 — árbol desde notación prefija: \"- * a b + c d\"");
+        ArbolAritmetico arbol2 = new ArbolAritmetico();
+        arbol2.construirDesdePreorden("- * a b + c d");
+        arbol2.sustituirVariable("a", "5");
+        arbol2.sustituirVariable("b", "3");
+        arbol2.sustituirVariable("c", "2");
+        arbol2.sustituirVariable("d", "4");
+        System.out.println("Con a=5, b=3, c=2, d=4 → resultado: " + arbol2.evaluar());
 
         Core.footerMessage(7);
     }
