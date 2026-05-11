@@ -20,7 +20,7 @@ public class ArbolAritmetico {
         this.raiz = raiz;
     }
 
-    // Sustituye todas las ocurrencias de variable por el valor dado
+    // Sustituye todas las ocurrencias de variable por el valor que le dann
     public void sustituirVariable(String variable, String valor) {
         sustituirRec(raiz, variable, valor);
     }
@@ -34,7 +34,7 @@ public class ArbolAritmetico {
         sustituirRec(nodo.getDerecha(), variable, valor);
     }
 
-    // Evalúa el árbol. Asume que no quedan variables (todas sustituidas).
+    // Evaluando el arbol asumiendo que no quedan variables.
     public double evaluar() {
         return evaluarRec(raiz);
     }
@@ -62,8 +62,8 @@ public class ArbolAritmetico {
         }
     }
 
-    // Construye árbol desde expresión en notación prefija (tokens separados por espacio)
-    // Ej: "* + x 3 2"
+    
+    // ej "* + x 3 2"
     public void construirDesdePreorden(String expresion) {
         if (expresion == null || expresion.isBlank()) {
             throw new IllegalArgumentException("Expresión vacía");
