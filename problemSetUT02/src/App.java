@@ -1,3 +1,4 @@
+import clases.ArbolAVL;
 import clases.ArbolBinario;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class App {
                 case 12:
                     break;
                 case 13:
+                    ArbolAVL.ejercicio13();
                     break;
                 case 0:
                     sc.close();
